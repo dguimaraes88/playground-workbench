@@ -15,7 +15,7 @@ Window {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         cache: false  // IMPORTANTE: Desativa cache para forçar reload
-        asynchronous: true  // Carregamento assíncrono para melhor performance
+        //asynchronous: true  // Carregamento assíncrono para melhor performance
         source: udpClient.imageSource
 
         // Indicador de carregamento
@@ -28,24 +28,24 @@ Window {
         }
 
         // Debug: Status da imagem
-        Text {
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.margins: 10
-            text: "Status: " + getStatusText()
-            color: "#00FF00"
-            font.pixelSize: 12
+        // Text {
+        //     anchors.bottom: parent.bottom
+        //     anchors.left: parent.left
+        //     anchors.margins: 10
+        //     text: "Status: " + getStatusText()
+        //     color: "#00FF00"
+        //     font.pixelSize: 12
 
-            function getStatusText() {
-                switch(videoDisplay.status) {
-                    case Image.Null: return "Sem imagem"
-                    case Image.Ready: return "Pronto"
-                    case Image.Loading: return "Carregando..."
-                    case Image.Error: return "ERRO"
-                    default: return "Desconhecido"
-                }
-            }
-        }
+        //     function getStatusText() {
+        //         switch(videoDisplay.status) {
+        //             case Image.Null: return "Sem imagem"
+        //             case Image.Ready: return "Pronto"
+        //             case Image.Loading: return "Carregando..."
+        //             case Image.Error: return "ERRO"
+        //             default: return "Desconhecido"
+        //         }
+        //     }
+        // }
     }
 
     // Conexão com o sinal C++
@@ -53,7 +53,6 @@ Window {
         target: udpClient
 
         function onImageSourceChanged() {
-            console.log("🎬 Novo frame! Atualizando imagem...")
             // Força reload da imagem
             var temp = videoDisplay.source
             videoDisplay.source = ""
@@ -64,7 +63,6 @@ Window {
     // Debug: Mostra quando a imagem muda de status
     Connections {
         target: videoDisplay
-
         function onStatusChanged() {
             console.log("📷 Status da imagem:", videoDisplay.status)
         }
@@ -96,7 +94,7 @@ Window {
             onPaint: {
                 var ctx = getContext("2d");
                 ctx.clearRect(0, 0, width, height);
-
+                /*
                 if (!handReceiver || handReceiver.handsDetected === 0) {
                     // Mensagem quando não detecta mãos
                     ctx.fillStyle = "#666666";
@@ -104,7 +102,7 @@ Window {
                     ctx.textAlign = "center";
                     ctx.fillText("Aguardando detecção de mãos...", width/2, height/2);
                     return;
-                }
+                } */
 
                 // Desenha cada mão detectada
                 var hands = handReceiver.hands;
@@ -151,7 +149,7 @@ Window {
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }
-
+                    /*
                     // Label da mão
                     var wristPos = landmarks[0];
                     ctx.fillStyle = handColor;
@@ -161,11 +159,11 @@ Window {
                         hand.label + " (" + (hand.confidence * 100).toFixed(0) + "%)",
                         wristPos.x * width,
                         wristPos.y * height - 20
-                    );
+                    ); */
                 }
             }
         }
-
+        /*
         // Informações na tela
         Rectangle {
             id: infoPanel
@@ -206,6 +204,7 @@ Window {
                 }
             }
         }
+        */
 
         // Atualiza canvas quando recebe novos dados
         Connections {
@@ -218,7 +217,7 @@ Window {
 
         // Animação suave
         Timer {
-            interval: 33 // ~30 FPS
+            interval: 30 // ~30 FPS
             running: true
             repeat: true
             onTriggered: {
