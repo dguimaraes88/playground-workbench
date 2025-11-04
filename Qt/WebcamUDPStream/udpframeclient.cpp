@@ -33,7 +33,7 @@ void UdpFrameReceiver::processPendingDatagrams()
                                 &senderAddress, &senderPort);
 
         // Debug: Mostra que recebeu dados
-        qDebug() << "📦 Recebido:" << datagram.size() << "bytes de" << senderAddress.toString();
+        //qDebug() << "📦 Recebido:" << datagram.size() << "bytes de" << senderAddress.toString();
 
         try {
             std::vector<uchar> buf(datagram.begin(), datagram.end());
@@ -55,7 +55,7 @@ void UdpFrameReceiver::processPendingDatagrams()
                 currentFrame = newFrame.copy();
                 locker.unlock();
 
-                qDebug() << "✅ Frame decodificado:" << frame_mat.cols << "x" << frame_mat.rows;
+                //qDebug() << "✅ Frame decodificado:" << frame_mat.cols << "x" << frame_mat.rows;
 
                 emit frameReceived();
             } else {
