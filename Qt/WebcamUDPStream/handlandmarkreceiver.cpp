@@ -31,7 +31,7 @@ void HandLandmarkReceiver::processPendingDatagrams()
                                 &senderAddress, &senderPort);
 
         // Debug: mostra que recebeu dados
-        // qDebug() << "📦 Hand data received:" << datagram.size() << "bytes";
+         qDebug() << "📦 Hand data received:" << datagram.size() << "bytes";
 
         // Parse JSON
         parseHandData(datagram);
