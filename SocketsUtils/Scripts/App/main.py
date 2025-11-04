@@ -1,5 +1,5 @@
 from videoCapture import VideoCapture # type: ignore
-from udpFrameSender import UDPFrameSender # type: ignore
+
 from handLandmarkDetector import HandLandmarkDetector # type: ignore 
 
 import threading 
@@ -12,7 +12,4 @@ if __name__ == "__main__":
     obj = VideoCapture(0,True)
     t1 = threading.Thread(target=obj.initVideoCapture)
     t1.start()
-    
-    obj2 = UDPFrameSender()
-    obj3 = HandLandmarkDetector()
     
