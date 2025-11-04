@@ -11,7 +11,7 @@ HandLandmarkReceiver::HandLandmarkReceiver(QObject *parent)
     udpSocket = new QUdpSocket(this);
 
     if (udpSocket->bind(QHostAddress::Any, HAND_PORT)) {
-        qDebug() << "🖐️  Hand Landmark Receiver bound to port" << HAND_PORT;
+        //qDebug() << "🖐️  Hand Landmark Receiver bound to port" << HAND_PORT;
         connect(udpSocket, &QUdpSocket::readyRead,
                 this, &HandLandmarkReceiver::processPendingDatagrams);
     } else {
@@ -31,7 +31,7 @@ void HandLandmarkReceiver::processPendingDatagrams()
                                 &senderAddress, &senderPort);
 
         // Debug: mostra que recebeu dados
-         qDebug() << "📦 Hand data received:" << datagram.size() << "bytes";
+        // qDebug() << "📦 Hand data received:" << datagram.size() << "bytes";
 
         // Parse JSON
         parseHandData(datagram);
