@@ -1,7 +1,9 @@
 QT += quick
 
 SOURCES += \
-        main.cpp
+        handlandmarkreceiver.cpp \
+        main.cpp \
+        udpframeclient.cpp
 
 resources.files = main.qml 
 resources.prefix = /$${TARGET}
@@ -17,3 +19,9 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    handlandmarkreceiver.h \
+    udpframeclient.h
+
+include(opencv2/opencv2.pri)
